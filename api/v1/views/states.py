@@ -7,12 +7,14 @@ from models.state import State
 
 @app_views.route('/states', methods=['GET'])
 def statesGet():
+    """ states """
     allList = [x.to_dict() for x in storage.all(State).items()]
     return jsonify(allList)
 
 
 @app_views.route('/states/<state_id>', methods=['GET'])
 def statesGetId(state_id):
+    """ states """
     theState = storage.get(State, state_id)
     if theState:
         return jsonify(theState.to_dict())
@@ -22,6 +24,7 @@ def statesGetId(state_id):
 
 @app_views.route('/states/<state_id>', methods=['DELETE'])
 def statesDeleteId(state_id):
+    """ states """
     theState = storage.get(State, state_id)
     if theState:
         storage.delete(theState)
@@ -32,6 +35,7 @@ def statesDeleteId(state_id):
 
 @app_views.route('/states', methods=['POST'])
 def statesPost():
+    """ states """
     print('test')
     requested = request.get_json()
     if requested:

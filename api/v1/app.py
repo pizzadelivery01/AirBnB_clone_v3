@@ -14,6 +14,7 @@ app.url_map.strict_slashes = False
 
 @app.teardown_appcontext
 def dbColose(error):
+    """ close """
     storage.close()
 
 
