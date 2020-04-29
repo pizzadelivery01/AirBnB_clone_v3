@@ -11,8 +11,11 @@ from models.state import State
 def citysGet(state_id):
     """ cities """
     theState = storage.get(State, state_id)
+    cities = []
     if theState:
-        return jsonify(theState.cities)
+        for city in state.cities:
+            cities.append(city.to_dict())
+        return jsonify(cities)
     else:
         abort(404)
 
@@ -28,21 +31,24 @@ def citysGetId(city_id):
 
 
 @app_views.route('/cities/<city_id>', strict_slashes=False, methods=['DELETE'])
-def citysDeleteId(city_id):
+def citysDeleteId(city_id=None):
     """ cities """
-    thecity = storage.get(City, city_id)
-    if thecity:
-        storage.delete(thecity)
-        return jsonify({}), 200
+
+    if city_id is not None:
+        thecity = storage.get(City, city_id)
+        if thecity:
+            thecity.delete()
+            storage.save()
+            return jsonify({}), 200
+        else:
+            abort(404)
     else:
         abort(404)
 
-
 @app_views.route('/states/<state_id>/cities', strict_slashes=False,
                  methods=['POST'])
-def citysPost(state_id):
+def citysPost(state_id=None):
     """ cities """
-    print('test')
     requested = request.get_json()
     theState = storage.get(State, state_id)
     if theState:
@@ -50,7 +56,7 @@ def citysPost(state_id):
             if 'name' in requested:
                 newcity = City(**requested)
                 setattr(newcity, 'state_id', state_id)
-                storage.new(newcity)
+                newcity.save()
             else:
                 return 'Missing name', 400
         else:
