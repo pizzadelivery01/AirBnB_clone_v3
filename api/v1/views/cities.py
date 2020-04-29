@@ -52,7 +52,7 @@ def citysPost(state_id):
         return jsonify(newcity.to_dict()), 201
     else:
         abort(404)
-    
+
 
 @app_views.route('/cities/<city_id>', methods=['PUT'])
 def citysPutId(city_id):

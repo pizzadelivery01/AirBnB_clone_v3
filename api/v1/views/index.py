@@ -10,13 +10,14 @@ from models.city import City
 from models.user import User
 
 
-
 allTypes = {"user": User, "state": State, "city": City,
-                "amenity": Amenity, "place": Place, "review": Review}
+            "amenity": Amenity, "place": Place, "review": Review}
+
 
 @app_views.route('/status')
 def status():
     return jsonify({"status": "OK"})
+
 
 @app_views.route('/stats')
 def stats():
