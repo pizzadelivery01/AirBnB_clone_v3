@@ -73,12 +73,11 @@ class FileStorage:
         """
         gets object by class and id
         """
-        if cls is not None and type(cls) is str and id in not None\
-           and type(id) is str and cls in classes:
-            key = cls + '.' + id
-            object = self.__objects.get(key, None)
+        key = cls.__name__ + '.' + id
+        try:
+            object = self.__objects[key]
             return object
-        else:
+        except:
             return None
 
     def count(self, cls=None):
@@ -86,8 +85,8 @@ class FileStorage:
         count number of objects by class or all objects
         """
         total = 0
-        if type(cls) == str and cls in classes:
+        if cls is None:
             total = len(self.all(cls))
-        elif cls is None:
+        else:
             total = len(self.__objects)
         return total
