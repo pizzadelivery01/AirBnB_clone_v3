@@ -16,13 +16,13 @@ allTypes = {"user": User, "state": State, "city": City,
             "amenity": Amenity, "place": Place, "review": Review}
 
 
-@app_views.route('/status')
+@app_views.route('/status',  strict_slashes=False)
 def status():
     """ status """
     return jsonify({"status": "OK"})
 
 
-@app_views.route('/stats')
+@app_views.route('/stats',  strict_slashes=False)
 def stats():
     """ stats """
     results = {}

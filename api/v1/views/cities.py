@@ -6,7 +6,8 @@ from models.city import City
 from models.state import State
 
 
-@app_views.route('/states/<state_id>/cities', methods=['GET'])
+@app_views.route('/states/<state_id>/cities', strict_slashes=False,
+                 methods=['GET'])
 def citysGet(state_id):
     """ cities """
     theState = storage.get(State, state_id)
@@ -16,7 +17,7 @@ def citysGet(state_id):
         abort(404)
 
 
-@app_views.route('/cities/<city_id>', methods=['GET'])
+@app_views.route('/cities/<city_id>', strict_slashes=False, methods=['GET'])
 def citysGetId(city_id):
     """ city """
     thecity = storage.get(City, city_id)
@@ -26,7 +27,7 @@ def citysGetId(city_id):
         abort(404)
 
 
-@app_views.route('/cities/<city_id>', methods=['DELETE'])
+@app_views.route('/cities/<city_id>', strict_slashes=False, methods=['DELETE'])
 def citysDeleteId(city_id):
     """ cities """
     thecity = storage.get(City, city_id)
@@ -37,7 +38,8 @@ def citysDeleteId(city_id):
         abort(404)
 
 
-@app_views.route('/states/<state_id>/cities', methods=['POST'])
+@app_views.route('/states/<state_id>/cities', strict_slashes=False,
+                 methods=['POST'])
 def citysPost(state_id):
     """ cities """
     print('test')
@@ -58,7 +60,7 @@ def citysPost(state_id):
         abort(404)
 
 
-@app_views.route('/cities/<city_id>', methods=['PUT'])
+@app_views.route('/cities/<city_id>', strict_slashes=False, methods=['PUT'])
 def citysPutId(city_id):
     """ cities """
     ignore = ['id', 'created_at', 'updated_at', 'state_id']
