@@ -15,7 +15,7 @@ app.url_map.strict_slashes = False
 def dbColose(error):
     storage.close()
 
-    
+
 @app.errorhandler(404)
 def page_not_found(e):
     # note that we set the 404 status explicitly
