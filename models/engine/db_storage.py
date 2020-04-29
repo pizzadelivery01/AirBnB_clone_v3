@@ -79,10 +79,10 @@ class DBStorage:
         """
         gets an object by id
         """
-        if cls is not None and type(cls) is str and id is not None\
-           and type(id) is str and cls in classes:
-            cls = classes[cls]
-            result = self.__session.query(cls).filter(cls.id == id).first()
+        if cls is not None and id is not None\
+           and cls in classes:
+            cls = classes[cls.__name__]
+            result = self.__session.query(cls).get(id)
             return result
         else :
             return None
@@ -92,9 +92,13 @@ class DBStorage:
         counts nuber of objects by class if given or all objects in storage
         """
         total = 0
-        if type(cls) == str and cls in classes:
-            cls = self.__session.query(cls).count()
-        elif cls is None:
-            for cls in classes.values():
-                total = total + self.__session.query(cls).count()
+        if cls is None:
+            for each in classes:
+               objs = self.__session.query(classes[each]).all()
+               for obj in objs:
+                   total += 1
+        else:
+            cls = self.__session.query(cls).all()
+            for obj in cls:
+                total += 1
         return total
