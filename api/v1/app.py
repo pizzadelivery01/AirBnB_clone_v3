@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-from flask import Flask, jsonify
+""" runs app """
+from flask import Flask, jsonify, make_response
 from models import storage
 from api.v1.views import app_views
 import os
@@ -18,8 +19,8 @@ def dbColose(error):
 
 @app.errorhandler(404)
 def page_not_found(e):
-    # note that we set the 404 status explicitly
-    return jsonify({"error": "Not found"}), 404
+    """ note that we set the 404 status explicitly """
+    return make_response(jsonify({"error": "Not found"}), 404)
 
 if __name__ == "__main__":
     host = os.environ.get('HBNB_API_HOST') or '0.0.0.0'
