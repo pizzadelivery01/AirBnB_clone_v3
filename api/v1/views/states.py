@@ -10,7 +10,7 @@ def statesGet():
     """ states """
     allList = []
     objs = storage.all(State)
-    for x,y in objs.items():
+    for x, y in objs.items():
         allList.append(y.to_dict())
     return jsonify(allList)
 
@@ -26,7 +26,8 @@ def statesGetId(state_id):
         abort(404)
 
 
-@app_views.route('/states/<state_id>', strict_slashes=False, methods=['DELETE'])
+@app_views.route('/states/<state_id>', strict_slashes=False,
+                 methods=['DELETE'])
 def statesDeleteId(state_id=None):
     """ states """
     theState = storage.get(State, state_id)
@@ -47,7 +48,7 @@ def statesPost():
             newState = State(**requested)
             newState.save()
         else:
-            abort,(400, "Missing name")
+            abort(400, "Missing name")
     else:
         abort(400, "Not a JSON")
     return jsonify(newState.to_dict()), 201
