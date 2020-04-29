@@ -126,7 +126,7 @@ TestBaseModel class:
 * `def test_user_module_docstring(self)` - Test for the user.py module docstring
 * `def test_user_class_docstring(self)` - Test for the User class docstring
 
-
+Adding addition of flask to this update and RestApi
 ## Examples of use
 ```
 vagrantAirBnB_clone$./console.py
