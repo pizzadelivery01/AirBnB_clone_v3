@@ -16,7 +16,7 @@ def statesGet():
 
 
 @app_views.route('/states/<state_id>', strict_slashes=False, methods=['GET'])
-def statesGetId(state_id):
+def statesGetId(state_id=None):
     """ states """
     target = "State." + str(state_id)
     allList = []
@@ -45,7 +45,7 @@ def statesPost():
     requested = request.get_json()
     if requested:
         if 'name' in requested:
-            newState = State(**request.getjson())
+            newState = State(**requested)
             newState.save()
         else:
             abort(400, "Missing name")
