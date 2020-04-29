@@ -45,7 +45,7 @@ def statesPost():
     requested = request.get_json()
     if requested:
         if 'name' in requested:
-            newState = State(**requested)
+            newState = State(**request.getjson())
             newState.save()
         else:
             abort(400, "Missing name")
