@@ -17,7 +17,7 @@ allTypes = {"user": User, "state": State, "city": City,
 @app_views.route('/status')
 def status():
     """ status """
-    return jsonify({"status": "OK"})
+    return jsonify("status": "OK")
 
 
 @app_views.route('/stats')
