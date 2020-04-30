@@ -11,12 +11,12 @@ from models.state import State
 
 @app_views.route('/states/<state_id>/cities', strict_slashes=False,
                  methods=['GET'])
-def citysGet(state_id):
+def citysGet(state_id=None):
     """ cities """
     theState = storage.get(State, state_id)
     cities = []
     if theState:
-        for city in state.cities:
+        for city in theState.cities:
             cities.append(city.to_dict())
         return jsonify(cities)
     else:
@@ -44,6 +44,7 @@ def citysDeleteId(city_id=None):
         return jsonify({}), 200
     else:
         abort(404)
+
 
 @app_views.route('/states/<state_id>/cities', strict_slashes=False,
                  methods=['POST'])
