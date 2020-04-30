@@ -16,7 +16,7 @@ def amentiyGet(amenity_id=None):
     """ amenity get """
     a_list = []
     a_id = "Amenity." + str(amenity_id)
-    if amenity_id == None:
+    if amenity_id is None:
         theAmenities = storage.all(Amenity)
         if theAmenities:
             for x, y in theAmenities.items():
@@ -43,7 +43,7 @@ def delete_amenity(amenity_id=None):
         abort(404)
 
 
-@app_views.route"/amenities/", strict_slashes=False, methods=['POST'])
+@app_views.route("/amenities/", strict_slashes=False, methods=['POST'])
 def post_amenities():
     """
     Post an amenity
@@ -70,7 +70,7 @@ def update_amenity(amenity_id=None):
         if requested:
             for x, y in requested.items():
                 if x not in ignore:
-                    setattr(amen,x ,y)
+                    setattr(amen, x, y)
             amen.save()
         else:
             abort(400, "Not a JSON")
