@@ -37,14 +37,11 @@ def citysGetId(city_id):
 def citysDeleteId(city_id=None):
     """ cities """
 
-    if city_id is not None:
-        thecity = storage.get(City, city_id)
-        if thecity:
-            thecity.delete()
-            storage.save()
-            return jsonify({}), 200
-        else:
-            abort(404)
+    thecity = storage.get(City, city_id)
+    if thecity:
+        thecity.delete()
+        storage.save()
+        return jsonify({}), 200
     else:
         abort(404)
 
@@ -58,7 +55,7 @@ def citysPost(state_id=None):
         if requested:
             if 'name' in requested:
                 newcity = City(**requested)
-                setattr(newcity, 'state_id', state_id)
+                newcity.state_id = state_id
                 newcity.save()
             else:
                 return 'Missing name', 400
@@ -82,7 +79,7 @@ def citysPutId(city_id):
                     setattr(thecity, x, y)
             thecity.save()
         else:
-            return 'Not a JSON', 400
+            abort(400, "Not a JSON")
         return jsonify(thecity.to_dict()), 200
     else:
         abort(404)
