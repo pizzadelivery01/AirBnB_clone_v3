@@ -79,6 +79,7 @@ class FileStorage:
                     if v.id == id:
                         return v
         return None
+
     def count(self, cls=None):
         """
         count number of objects by class or all objects
