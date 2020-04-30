@@ -12,8 +12,8 @@ from models.city import City
 from models.user import User
 from models.base_model import BaseModel, Base
 
-allTypes = {"user": User, "state": State, "city": City,
-            "amenity": Amenity, "place": Place, "review": Review}
+allTypes = {"users": User, "states": State, "cities": City,
+            "amenities": Amenity, "places": Place, "reviews": Review}
 
 
 @app_views.route('/status',  strict_slashes=False)
