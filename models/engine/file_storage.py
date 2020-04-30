@@ -73,12 +73,12 @@ class FileStorage:
         """
         gets object by class and id
         """
-        key = cls + '.' + id
-        try:
-            return self.__objects.get(key, None)
-        except:
-            return None
-
+        if cls is not None and id is not None:
+            for v in self.__objects.values():
+                if cls == v.__class__ or cls == v.__class__.__name__:
+                    if v.id == id:
+                        return v
+        return None
     def count(self, cls=None):
         """
         count number of objects by class or all objects
