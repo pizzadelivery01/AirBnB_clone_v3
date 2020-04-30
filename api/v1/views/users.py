@@ -42,7 +42,7 @@ def delete_user(user_id=None):
 
 @app_views.route("/users", strict_slashes=False, methods=['POST'])
 def post_user():
-        """
+    """
     Post a User
     """
     if not request.get_json():

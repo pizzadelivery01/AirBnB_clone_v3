@@ -49,7 +49,7 @@ def delete_place(place_id=None):
 
 
 @app_views.route("/cities/<city_id>/places", strict_slashes=False,
-                 methods['POST'])
+                 methods=['POST'])
 def post_place(city_id):
     """
     Post a Place
