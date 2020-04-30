@@ -43,9 +43,8 @@ def delete_amenity(amenity_id=None):
         abort(404)
 
 
-@app_views.route("/amenities/<amenity_id>", strict_slashes=False,
-                 methods=['POST'])
-def post_amenities(amenity_id=None):
+@app_views.route("/amenities/", strict_slashes=False, methods=['POST'])
+def post_amenities():
     """
     Post an amenity
     """
