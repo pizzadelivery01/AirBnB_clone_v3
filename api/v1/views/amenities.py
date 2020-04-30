@@ -21,10 +21,10 @@ def amentiyGet(amenity_id=None):
         if theAmenities:
             for x, y in theAmenities.items():
                 a_list.append(y.to_dict())
-        elif a_id in sotrage.all(Amenity).keys():
-            return jsonify(storage.all(Amenity)[a_id].to_dict())
-        else:
-            abort(404)
+    elif a_id in storage.all(Amenity).keys():
+        return jsonify(storage.all(Amenity)[a_id].to_dict())
+    else:
+        abort(404)
     return jsonify(a_list)
 
 
@@ -43,18 +43,26 @@ def delete_amenity(amenity_id=None):
         abort(404)
 
 
-@app_views.route("/amenities/", strict_slashes=False, methods=['POST'])
-def post_amenities():
+@app_views.route("/amenities/<amenity_id>", strict_slashes=False,
+                 methods=['POST'])
+def post_amenities(amenity_id=None):
     """
     Post an amenity
     """
-    if request.get_json() is None:
-        abort(400, "Not a JSON")
-    if "name" not in request.get_json():
-        abort(400, "Missing name")
-    amen = Amenity(**request.get_json())
-    amen.save()
-    return jsonify(amen.to_dict()), 201
+    requested = request.get_json()
+    amen = storage.get(Amenity, amenity_id)
+    if amen:
+        if requested:
+            if 'name' in requested:
+                new_a = Amenity(**requested)
+                new_a.save()
+            else:
+                abort(400, "Missing name")
+        else:
+            abort(400, "Not a JSON")
+        return jsonify(new_a.to_dict()), 201
+    else:
+        abort(404)
 
 
 @app_views.route("/amenities/<amenity_id>", strict_slashes=False,
