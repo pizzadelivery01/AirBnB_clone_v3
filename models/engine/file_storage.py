@@ -73,9 +73,9 @@ class FileStorage:
         """
         gets object by class and id
         """
-        key = cls.__name__ + '.' + str(id)
+        key = cls + '.' + id
         try:
-            return self.__objects[key]
+            return self.__objects.get(key, None)
         except:
             return None
 
