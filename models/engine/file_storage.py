@@ -73,10 +73,9 @@ class FileStorage:
         """
         gets object by class and id
         """
-        key = cls.__name__ + '.' + id
+        key = cls.__name__ + '.' + str(id)
         try:
-            object = self.__objects[key]
-            return object
+            return self.__objects[key]
         except:
             return None
 
@@ -85,7 +84,7 @@ class FileStorage:
         count number of objects by class or all objects
         """
         total = 0
-        if cls is None:
+        if cls is not None:
             total = len(self.all(cls))
         else:
             total = len(self.__objects)
