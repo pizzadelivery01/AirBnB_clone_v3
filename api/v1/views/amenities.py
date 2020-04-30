@@ -49,19 +49,13 @@ def post_amenities():
     Post an amenity
     """
     requested = request.get_json()
-    amen = storage.get(Amenity, amenity_id)
-    if amen:
-        if requested:
-            if 'name' in requested:
-                new_a = Amenity(**requested)
-                new_a.save()
-            else:
-                abort(400, "Missing name")
-        else:
-            abort(400, "Not a JSON")
-        return jsonify(new_a.to_dict()), 201
-    else:
-        abort(404)
+    if requested is None:
+        abort(400, "Not a JSON")
+    if "name" not in requested:
+        abort(400, "Missing name")
+    amen = Amenity(**requested)
+    amen.save()
+    return jsonify(amen.to_dict()), 201
 
 
 @app_views.route("/amenities/<amenity_id>", strict_slashes=False,
