@@ -87,7 +87,7 @@ class TestFileStorage(unittest.TestCase):
     def test_save(self):
         """Test that save properly saves objects to file.json"""
 
-    @unittest.skipIf(modes.storage_t != 'db', "not testing db storage")
+"""    @unittest.skipIf(modes.storage_t != 'db', "not testing db storage")
     def test_get(self):
         """
         test get runturns object
@@ -117,3 +117,4 @@ class TestFileStorage(unittest.TestCase):
          made_up_user.save()
          self.assertEqual(models.storage.count("State"), start_count + 1)
          self.assertEqual(models.storage.count(), start_count + 2)
+"""
